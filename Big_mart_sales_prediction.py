@@ -9,16 +9,16 @@ import numpy as np
 import pickle
 import streamlit as st
 
-with open("C:/Users/prachet/OneDrive - Vidyalankar Institute of Technology/Desktop/Coding/Machine Learning/ML-Project-12-Big Mart Sales Prediction/model.pkl", 'rb') as f:
+with open("model.pkl", 'rb') as f:
     model1 = pickle.load(f)
 
-with open("C:/Users/prachet/OneDrive - Vidyalankar Institute of Technology/Desktop/Coding/Machine Learning/ML-Project-12-Big Mart Sales Prediction/model2.pkl", 'rb') as f:
-    model2 = pickle.load(f)
-    
-with open("C:/Users/prachet/OneDrive - Vidyalankar Institute of Technology/Desktop/Coding/Machine Learning/ML-Project-12-Big Mart Sales Prediction/model3.pkl", 'rb') as f:
+# with open("model2.pkl", 'rb') as f:
+#     model2 = pickle.load(f)
+
+with open("model3.pkl", 'rb') as f:
     model3 = pickle.load(f)
 
-with open("C:/Users/prachet/OneDrive - Vidyalankar Institute of Technology/Desktop/Coding/Machine Learning/ML-Project-12-Big Mart Sales Prediction/encoders.pkl", 'rb') as f:
+with open("encoders.pkl", 'rb') as f:
     encoders = pickle.load(f)
     
 
@@ -40,21 +40,21 @@ def big_mart_sales_prediction1(input_data):
 
     return prediction[0]
 
-def big_mart_sales_prediction2(input_data):
+# def big_mart_sales_prediction2(input_data):
     
-    encoded_data = list(input_data)
+#     encoded_data = list(input_data)
     
-    columns = ['Item_Identifier', 'Item_Weight', 'Item_Fat_Content', 'Item_Visibility', 'Item_Type', 'Item_MRP', 'Outlet_Identifier', 'Outlet_Establishment_Year', 'Outlet_Size', 'Outlet_Location_Type', 'Outlet_Type']
+#     columns = ['Item_Identifier', 'Item_Weight', 'Item_Fat_Content', 'Item_Visibility', 'Item_Type', 'Item_MRP', 'Outlet_Identifier', 'Outlet_Establishment_Year', 'Outlet_Size', 'Outlet_Location_Type', 'Outlet_Type']
 
-    for i, col in enumerate(columns):
-        if col in encoders:
-            encoded_data[i] = encoders[col].transform([encoded_data[i]])[0]
+#     for i, col in enumerate(columns):
+#         if col in encoders:
+#             encoded_data[i] = encoders[col].transform([encoded_data[i]])[0]
     
-    encoded_data = np.array(encoded_data).reshape(1, -1)
+#     encoded_data = np.array(encoded_data).reshape(1, -1)
     
-    prediction = model2.predict(encoded_data)
+#     prediction = model2.predict(encoded_data)
 
-    return prediction[0]
+#     return prediction[0]
 
 def big_mart_sales_prediction3(input_data):
     
@@ -108,7 +108,7 @@ def main():
     
     # code for prediction
     sales1 = ''
-    sales2 = ''
+    sales3 = ''
     
     #creating a button for Prediction
     if st.button('Predict Big Mart Sales using Model1'):
@@ -117,10 +117,10 @@ def main():
     st.success('The Predicted Sales: '+ str(sales1)+'$'+('(XGBoost)'))
     
     
-    if st.button('Predict Big Mart Sales using Model2'):
-        sales2 = big_mart_sales_prediction2((Item_Identifier,Item_Weight,Item_Fat_Content,Item_Visibility,Item_Type,Item_MRP,Outlet_Identifier,Outlet_Establishment_Year,Outlet_Size,Outlet_Location_Type,Outlet_Type))
+    # if st.button('Predict Big Mart Sales using Model2'):
+    #     sales2 = big_mart_sales_prediction2((Item_Identifier,Item_Weight,Item_Fat_Content,Item_Visibility,Item_Type,Item_MRP,Outlet_Identifier,Outlet_Establishment_Year,Outlet_Size,Outlet_Location_Type,Outlet_Type))
         
-    st.success('The Predicted Sales: '+ str(sales2)+'$'+('(Random Forest)'))
+    # st.success('The Predicted Sales: '+ str(sales2)+'$'+('(Random Forest)'))
     
     
     if st.button('Predict Big Mart Sales using Model3'):
